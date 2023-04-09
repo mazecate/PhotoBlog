@@ -62,7 +62,3 @@
 </style>
 
 <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-</body>
-</html>

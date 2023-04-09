@@ -5,6 +5,7 @@
                 <strong>PhotoBlog</strong>
             </a>
             <security:authorize access="isAuthenticated()">
+                <a href='<c:url value="/user/profile/"/><security:authentication property="principal.username" />'>Profile</a>
                 <c:import url="logout.jsp"/>
             </security:authorize>
             <security:authorize access="isAnonymous()">
