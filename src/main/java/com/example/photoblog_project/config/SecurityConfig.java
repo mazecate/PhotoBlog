@@ -23,6 +23,7 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/blog/list")
                         .failureUrl("/login?error")
                         .permitAll()
                 )
