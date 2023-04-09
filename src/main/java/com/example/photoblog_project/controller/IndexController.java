@@ -1,31 +1,50 @@
 package com.example.photoblog_project.controller;
 
+import com.example.photoblog_project.dao.BlogService;
 import com.example.photoblog_project.dao.UserService;
+import com.example.photoblog_project.model.Blog;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class IndexController {
-    @GetMapping("/")
-    public String index() {
-        return "redirect:/blog/list";
-    }
+    @Resource
+    private BlogService blogService;
 
+    @Resource
+    private UserService userService;
 
+//     Debug use
+//    @GetMapping("/")
+//    public String index() {
+//        return "redirect:/blog/list";
+//    }
 
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @Resource
-    private UserService userService;
+    @GetMapping("/")
+    public String index(ModelMap model, Principal principal) {
+        boolean isLogin = false;
+        if (principal != null) {
+            isLogin = true;
+        }
+
+        model.addAttribute("photoList", blogService.getBlog());
+        model.addAttribute("userList", userService.getAllUser());
+        return "index";
+    }
 
     public static class RegisterForm {
         private String username;
