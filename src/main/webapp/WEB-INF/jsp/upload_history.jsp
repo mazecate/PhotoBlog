@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Customer Support</title>
+    <c:import url="head_script.jsp"/>
+    <title>Photoblog - Upload Photo History</title>
     <style>
         .card {
             /* Add shadows to create the "card" effect */
@@ -25,38 +26,51 @@
 
 </head>
 <body>
-<c:url var="logoutUrl" value="/logout"/>
-<form action="${logoutUrl}" method="post">
-    <input type="submit" value="Log out"/>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
-
-<h2>Tickets</h2>
-
-
-<c:choose>
-    <c:when test="${fn:length(uploadDatabase) == 0}">
-        <i>There are no comment in the very blog.</i>
-    </c:when>
-    <c:otherwise>
-
-        <c:forEach items="${uploadDatabase}" var="entry">
-
-            <div class="card">
-
-
-                <c:out value="${entry.createBy}"/>
-                create a blog ->title : <c:out value="${entry.description}"/>
-                (blogID) : <c:out value="${entry.id}"/>
-                at : <c:out value="${entry.createAt}"/>
+<%--<c:url var="logoutUrl" value="/logout"/>--%>
+<%--<form action="${logoutUrl}" method="post">--%>
+<%--    <input type="submit" value="Log out"/>--%>
+<%--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+<%--</form>--%>
+<c:import url="header.jsp"/>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col">
                 <br>
+                <br>
+                <a href="<c:url value="/blog/list" />">Return to list blog</a>
+                <br>
+                <br>
+                <h2>Upload Photo History</h2>
 
 
+                <c:choose>
+                    <c:when test="${fn:length(uploadDatabase) == 0}">
+                        <i>There are no comment in the very blog.</i>
+                    </c:when>
+                    <c:otherwise>
+
+                        <c:forEach items="${uploadDatabase}" var="entry">
+
+                            <div class="card">
+
+
+                                <c:out value="${entry.createBy}"/>
+                                create a blog ->title : <c:out value="${entry.description}"/>
+                                (blogID) : <c:out value="${entry.id}"/>
+                                at : <c:out value="${entry.createAt}"/>
+                                <br>
+
+
+                            </div>
+                        </c:forEach>
+
+                    </c:otherwise>
+                </c:choose>
             </div>
-        </c:forEach>
-
-    </c:otherwise>
-</c:choose>
-
+        </div>
+    </div>
+</main>
+<c:import url="footer.jsp"/>
 </body>
 </html>

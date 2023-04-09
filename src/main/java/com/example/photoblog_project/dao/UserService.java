@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void createAdminUser(String username, String password, String desc,String email,String phone, String[] roles) {
-        PBUser user = new PBUser(username, password,email,phone, roles, desc);
+        PBUser user = new PBUser(username, password, phone, email, roles, desc);
         UserRepo.save(user);
     }
 

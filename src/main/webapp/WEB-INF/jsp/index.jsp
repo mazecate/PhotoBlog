@@ -46,15 +46,15 @@
                                             </div>
                                             <c:out value="${entry.description}"/>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <security:authorize access="isAuthenticated()">
-                                                    <security:authorize access="hasRole('ADMIN') or principal.username=='${entry.createBy}'">
-                                                        <a href="<c:url value="/blog/edit/${entry.id}"/>" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                                    </security:authorize>
-                                                </security:authorize>
-                                            </div>
-                                        </div>
+<%--                                        <div class="d-flex justify-content-between align-items-center">--%>
+<%--                                            <div class="btn-group">--%>
+<%--                                                <security:authorize access="isAuthenticated()">--%>
+<%--                                                    <security:authorize access="hasRole('ADMIN') or principal.username=='${entry.createBy}'">--%>
+<%--                                                        <a href="<c:url value="/blog/edit/${entry.id}"/>" class="btn btn-sm btn-outline-secondary">Edit</a>--%>
+<%--                                                    </security:authorize>--%>
+<%--                                                </security:authorize>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
                                     </div>
                                 </div>
                                 <a href="<c:url value="/blog/view/${entry.id}" />" class="stretched-link"></a>
@@ -68,3 +68,5 @@
 </main>
 
 <c:import url="footer.jsp"/>
+</body>
+</html>

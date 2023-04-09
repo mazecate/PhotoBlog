@@ -36,57 +36,61 @@
 <c:import url="header.jsp"/>
 <main>
     <div class="container">
-        <div class="col">
-            <h2>Blog</h2>
-            username: <c:out value="${username}"/>
-            [<a href="<c:url value="/user/profile/${username}" />">my Profile</a>]
-            <br>
-            <security:authorize access="hasRole('ADMIN')">
-                admin function: <br>
-                <a href="<c:url value="/user" />">Manage User Accounts</a><br/><br/>
-                <a href="<c:url value="/blog/commenthistory" />">all user comment history</a><br/><br/>
-                <a href="<c:url value="/blog/upload_history" />">all user update photo history</a><br/><br/>
+        <div class="row">
+            <div class="col">
+                <h2>Blog</h2>
+                username: <c:out value="${username}"/>
+                [<a href="<c:url value="/user/profile/${username}" />">my Profile</a>]
+                <br>
+                <security:authorize access="hasRole('ADMIN')">
+                    admin function: <br>
+                    <a href="<c:url value="/user" />">Manage User Accounts</a><br/><br/>
+                    <a href="<c:url value="/blog/commenthistory" />">all user comment history</a><br/><br/>
+                    <a href="<c:url value="/blog/upload_history" />">all user update photo history</a><br/><br/>
 
-            </security:authorize>
-            user function: <br>
-            <a href="<c:url value="/blog/create" />">Create a blog</a><br/><br/>
-            <a href="<c:url value="/blog/own_commenthistory" />">my own comment history</a><br/><br/>
-            <a href="<c:url value="/blog/own_upload_history" />">my own update photo history</a><br/><br/>
-            <c:choose>
-                <c:when test="${fn:length(photoDatabase) == 0}">
-                    <i>There are no blog in the system.</i>
-                </c:when>
-                <c:otherwise>
+                </security:authorize>
+                user function: <br>
+                <a href="<c:url value="/blog/create" />">Create a blog</a><br/><br/>
+                <a href="<c:url value="/blog/own_commenthistory" />">my own comment history</a><br/><br/>
+                <a href="<c:url value="/blog/own_upload_history" />">my own update photo history</a><br/><br/>
+                <c:choose>
+                    <c:when test="${fn:length(photoDatabase) == 0}">
+                        <i>There are no blog in the system.</i>
+                    </c:when>
+                    <c:otherwise>
 
-                    <c:forEach items="${photoDatabase}" var="entry">
-                        <div class="card">
-                            <c:forEach items="${entry.attachments}" var="attachment" varStatus="status">
-                                <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="100" height="100"/>
+                        <c:forEach items="${photoDatabase}" var="entry">
+                            <div class="card">
+                                <c:forEach items="${entry.attachments}" var="attachment" varStatus="status">
+                                    <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="100" height="100"/>
 
-                            </c:forEach><br/><br/>
+                                </c:forEach><br/><br/>
 
-                            <div class="container">
-                                <a href="<c:url value="/blog/view/${entry.id}" />">
-                                    description :
-                                    <c:out value="${entry.description}"/></a>
-                                (description: <c:out value="${entry.description}"/>)<br>
-                                (createby: <c:out value="${entry.createBy}"/>)<br>
-                                (createAt: <c:out value="${entry.createAt}"/>)
-                                <security:authorize access="hasRole('ADMIN') or
-                                            principal.username=='${entry.createBy}'">
-                                    [<a href="<c:url value="/blog/edit/${entry.id}"/>">Edit</a>]
-                                </security:authorize>
-                                <security:authorize access="hasRole('ADMIN')">
-                                    [<a href="<c:url value="/blog/delete/${entry.id}"/>">Delete</a>]
-                                </security:authorize>
-                                <br/>
+                                <div class="container">
+                                    <a href="<c:url value="/blog/view/${entry.id}" />">
+                                        description :
+                                        <c:out value="${entry.description}"/></a>
+                                    (description: <c:out value="${entry.description}"/>)<br>
+                                    (createby: <c:out value="${entry.createBy}"/>)<br>
+                                    (createAt: <c:out value="${entry.createAt}"/>)
+                                    <security:authorize access="hasRole('ADMIN') or
+                                                principal.username=='${entry.createBy}'">
+                                        [<a href="<c:url value="/blog/edit/${entry.id}"/>">Edit</a>]
+                                    </security:authorize>
+                                    <security:authorize access="hasRole('ADMIN')">
+                                        [<a href="<c:url value="/blog/delete/${entry.id}"/>">Delete</a>]
+                                    </security:authorize>
+                                    <br/>
+                                </div>
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
 
-                </c:otherwise>
-            </c:choose>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
     </div>
 </main>
 <c:import url="footer.jsp"/>
+</body>
+</html>
