@@ -31,7 +31,7 @@
                     <form:textarea path="body" rows="3" cols="20"/><br/><br/>
 
                     <b><spring:message code="blogPage.image"/></b><br/>
-                    <input type="file" name="attachments" multiple="multiple"/><br/><br/>
+                    <input type="file" name="attachments" multiple="multiple" accept="image/*" /><br/><br/>
                     <input type="submit" value="<spring:message code="btn.submit"/>"/>
                 </form:form>
             </div>

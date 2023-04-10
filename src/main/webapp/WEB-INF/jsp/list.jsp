@@ -100,12 +100,12 @@
                                     <td><c:out value="${entry.createBy}"/></td>
                                     <td><c:out value="${entry.createAt}"/></td>
                                     <td>
-                                        [<a href="<c:url value="/blog/view/${entry.id}"/>"><spring:message code="blogPage.view"/></a>]
+                                        [<a href="<c:url value="/blog/view/${entry.id}"/>"><spring:message code="blogPage.view"/></a>]<br>
                                         <security:authorize access="hasRole('ADMIN') or principal.username=='${entry.createBy}'">
-                                            [<a href="<c:url value="/blog/edit/${entry.id}"/>"><spring:message code="blogPage.edit"/></a>]
+                                            [<a href="<c:url value="/blog/edit/${entry.id}"/>"><spring:message code="blogPage.edit"/></a>]<br>
                                         </security:authorize>
                                         <security:authorize access="hasRole('ADMIN')">
-                                            [<a href="<c:url value="/blog/delete/${entry.id}"/>"><spring:message code="blogPage.delete"/></a>]
+                                            [<a href="<c:url value="/blog/delete/${entry.id}"/>"><spring:message code="blogPage.delete"/></a>]<br>
                                         </security:authorize>
                                     </td>
                                 </tr>
