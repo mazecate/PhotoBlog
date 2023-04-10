@@ -2,7 +2,7 @@
 <html>
 <head>
     <c:import url="head_script.jsp"/>
-    <title>Photoblog - Register</title>
+    <title>Photoblog - <spring:message code="register.title"/></title>
 </head>
 <body>
 <style>
@@ -23,25 +23,25 @@
 <c:import url="header.jsp"/>
 <main>
     <div class="center">
-        <c:import url="changelang.jsp"/>
+<%--        <c:import url="changelang.jsp"/>--%>
         <h2><spring:message code="register.title"/></h2>
         <form action="register" method="POST">
-            <label for="username"><spring:message code="register.username"/>:</label><br/>
+            <label for="username"><spring:message code="register.username"/></label><br/>
             <input type="text" id="username" name="username"/>
             <br/>
-            <label for="password"><spring:message code="register.password"/>:</label>
+            <label for="password"><spring:message code="register.password"/></label>
             <br/>
             <input type="password" id="password" name="password"/>
             <br/>
-            <label for="description">description</label>
+            <label for="description"><spring:message code="register.description"/></label>
             <br/>
             <input type="text" id="description" name="description"/>
             <br/>
-            <label for="email">email</label>
+            <label for="email"><spring:message code="register.email"/></label>
             <br/>
             <input type="text" id="email" name="email"/>
             <br/>
-            <label for="phone">phone</label>
+            <label for="phone"><spring:message code="register.phone"/></label>
             <br/>
             <input type="text" id="phone" name="phone"/>
 
@@ -53,7 +53,7 @@
         </form>
         <br>
         <br>
-        <a href="login" id="back"/><spring:message code="register.back"/></a>
+        <a href="login" id="back" style="text-decoration: none;" /><spring:message code="register.back"/></a>
     </div>
 </main>
 <c:import url="footer.jsp"/>

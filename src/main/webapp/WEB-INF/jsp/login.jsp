@@ -2,7 +2,7 @@
 <html>
 <head>
   <c:import url="head_script.jsp"/>
-  <title>Photoblog - Login</title>
+  <title>Photoblog - <spring:message code="login.title"/></title>
 </head>
 <body>
 <style>
@@ -15,24 +15,27 @@
 <main>
   <div class="center">
     <c:if test="${param.error != null}">
-      <p>Login failed.</p>
+      <p><spring:message code="msg.login.fail"/></p>
     </c:if>
     <c:if test="${param.logout != null}">
-      <p>You have logged out.</p>
+      <p><spring:message code="msg.logout"/></p>
     </c:if>
-    <h2>Customer Support Login</h2>
+    <h2><spring:message code="login.title"/></h2>
     <form action="login" method="POST">
-      <label for="username"><spring:message code="register.username"/></label><br/>
+      <label for="username"><spring:message code="login.username"/></label><br/>
       <input type="text" id="username" name="username"/><br/><br/>
-      <label for="password">Password</label><br/>
+
+      <label for="password"><spring:message code="login.password"/></label><br/>
       <input type="password" id="password" name="password"/><br/><br/>
+
       <input type="checkbox" id="remember-me" name="remember-me"/>
-      <label for="remember-me">Remember me</label><br/><br/>
+      <label for="remember-me"><spring:message code="login.remember"/></label><br/><br/>
+
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      <input type="submit" value="Log In"/>
+      <input type="submit" value='<spring:message code="login.title"/>' />
       <br>
       <br>
-      <a href="<c:url value="/register" />">Sing up</a>
+      <a href="<c:url value="/register" />"><spring:message code="register.title"/></a>
       <br>
       <br>
     </form>

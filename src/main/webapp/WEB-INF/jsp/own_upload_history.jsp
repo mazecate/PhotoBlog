@@ -2,7 +2,7 @@
 <html>
 <head>
     <c:import url="head_script.jsp"/>
-    <title>Photoblog - Own Upload Photo History</title>
+    <title>Photoblog - <spring:message code="hist.own.upload"/></title>
     <style>
         .card {
             /* Add shadows to create the "card" effect */
@@ -40,13 +40,13 @@
             <div class="col">
                 <br>
                 <br>
-                <a href="<c:url value="/blog/list" />">Return to list blog</a>
+                <a href="<c:url value="/blog/list" />"><spring:message code="backlink.blog"/></a>
                 <br>
                 <br>
-                <h2>Own Upload Photo History</h2>
+                <h2><spring:message code="hist.own.upload"/></h2>
                 <c:choose>
                     <c:when test="${fn:length(ownuploadDatabase) == 0}">
-                        <i>There are no comment in the very blog.</i>
+                        <i><spring:message code="msg.noUpload"/></i>
                     </c:when>
                     <c:otherwise>
 

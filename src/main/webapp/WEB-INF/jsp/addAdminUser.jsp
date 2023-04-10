@@ -2,7 +2,7 @@
 <html>
 <head>
     <c:import url="head_script.jsp"/>
-    <title>Photoblog - Add User</title>
+    <title>Photoblog - <spring:message code="User.create"/></title>
 </head>
 <body>
 <%--<c:url var="logoutUrl" value="/logout"/>--%>
@@ -16,34 +16,34 @@
         <div class="row">
             <div class="col">
                 <br><br>
-                <a href="<c:url value="/user/list" />">Return to user list</a>
+                <a href="<c:url value="/user/list" />"><spring:message code="backlink.user"/></a>
                 <br><br>
-                <h2>Create a User</h2>
+                <h2><spring:message code="User.create"/></h2>
                 <form:form method="POST" modelAttribute="PBUser">
 
-                    <form:label path="username">Username</form:label><br/>
+                    <form:label path="username"><spring:message code="User.username"/></form:label><br/>
                     <form:input type="text" path="username"/><br/><br/>
 
-                    <form:label path="password">Password</form:label><br/>
+                    <form:label path="password"><spring:message code="User.password"/></form:label><br/>
                     <form:input type="text" path="password"/><br/><br/>
 
 
-                    <form:label path="description">Description</form:label><br/>
+                    <form:label path="description"><spring:message code="User.description"/></form:label><br/>
                     <form:textarea rows="10" cols="50" path="description"/><br/><br/>
 
-                    <form:label path="email">email</form:label><br/>
+                    <form:label path="email"><spring:message code="User.email"/></form:label><br/>
                     <form:input type="email" path="email"/><br/><br/>
 
 
-                    <form:label path="phone">phone</form:label><br/>
+                    <form:label path="phone"><spring:message code="User.phone"/></form:label><br/>
                     <form:input type="text" path="phone"/><br/><br/>
 
-                    <form:label path="roles">Roles</form:label><br/>
+                    <form:label path="roles"><spring:message code="User.role"/></form:label><br/>
                     <form:checkbox path="roles" value="ROLE_USER"/>ROLE_USER
                     <form:checkbox path="roles" value="ROLE_ADMIN"/>ROLE_ADMIN
 
                     <br/><br/>
-                    <input type="submit" value="Add User"/>
+                    <input type="submit" value="<spring:message code="User.create"/>"/>
                 </form:form>
             </div>
         </div>

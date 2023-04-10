@@ -2,7 +2,7 @@
 <html>
 <head>
     <c:import url="head_script.jsp"/>
-    <title>Photoblog - Customer Support</title>
+    <title>Photoblog - <spring:message code="blogPage.head"/></title>
     <style>
         .card {
             /* Add shadows to create the "card" effect */
@@ -38,52 +38,79 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2>Blog</h2>
-                username: <c:out value="${username}"/>
-                [<a href="<c:url value="/user/profile/${username}" />">my Profile</a>]
+                <h2><spring:message code="blogPage.title"/></h2>
+                <spring:message code="User.username"/>: <c:out value="${username}"/>
+                [<a href="<c:url value="/user/profile/${username}" />"><spring:message code="User.profile"/></a>]
                 <br>
                 <security:authorize access="hasRole('ADMIN')">
-                    admin function: <br>
-                    <a href="<c:url value="/user" />">Manage User Accounts</a><br/><br/>
-                    <a href="<c:url value="/blog/commenthistory" />">all user comment history</a><br/><br/>
-                    <a href="<c:url value="/blog/upload_history" />">all user update photo history</a><br/><br/>
+                    <spring:message code="admin.fn"/>: <br>
+                    <a href="<c:url value="/user" />"><spring:message code="User.head"/></a><br/><br/>
+                    <a href="<c:url value="/blog/commenthistory" />"><spring:message code="hist.all.comment"/></a><br/><br/>
+                    <a href="<c:url value="/blog/upload_history" />"><spring:message code="hist.all.photo"/></a><br/><br/>
 
                 </security:authorize>
-                user function: <br>
-                <a href="<c:url value="/blog/create" />">Create a blog</a><br/><br/>
-                <a href="<c:url value="/blog/own_commenthistory" />">my own comment history</a><br/><br/>
-                <a href="<c:url value="/blog/own_upload_history" />">my own update photo history</a><br/><br/>
+                <spring:message code="user.fn"/>: <br>
+                <a href="<c:url value="/blog/create" />"><spring:message code="blogPage.create"/></a><br/><br/>
+                <a href="<c:url value="/blog/own_commenthistory" />"><spring:message code="hist.own.comment"/></a><br/><br/>
+                <a href="<c:url value="/blog/own_upload_history" />"><spring:message code="hist.own.upload"/></a><br/><br/>
                 <c:choose>
                     <c:when test="${fn:length(photoDatabase) == 0}">
-                        <i>There are no blog in the system.</i>
+                        <i><spring:message code="msg.noBlog"/></i>
                     </c:when>
                     <c:otherwise>
+                        <table class="table table-striped table-responsive">
+                            <tr>
+                                <td><spring:message code="blogPage.image"/></td>
+                                <td><spring:message code="blogPage.description"/></td>
+                                <td><spring:message code="blogPage.creator"/></td>
+                                <td><spring:message code="blogPage.create.time"/></td>
+                                <td><spring:message code="blogPage.action"/></td>
+                            </tr>
+                            <c:forEach items="${photoDatabase}" var="entry">
+<%--                                <div class="card">--%>
+<%--                                    <c:forEach items="${entry.attachments}" var="attachment" varStatus="status">--%>
+<%--                                        <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="100" height="100"/>--%>
 
-                        <c:forEach items="${photoDatabase}" var="entry">
-                            <div class="card">
-                                <c:forEach items="${entry.attachments}" var="attachment" varStatus="status">
-                                    <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="100" height="100"/>
+<%--                                    </c:forEach><br/><br/>--%>
 
-                                </c:forEach><br/><br/>
-
-                                <div class="container">
-                                    <a href="<c:url value="/blog/view/${entry.id}" />">
-                                        description :
-                                        <c:out value="${entry.description}"/></a>
-                                    (description: <c:out value="${entry.description}"/>)<br>
-                                    (createby: <c:out value="${entry.createBy}"/>)<br>
-                                    (createAt: <c:out value="${entry.createAt}"/>)
-                                    <security:authorize access="hasRole('ADMIN') or
-                                                principal.username=='${entry.createBy}'">
-                                        [<a href="<c:url value="/blog/edit/${entry.id}"/>">Edit</a>]
-                                    </security:authorize>
-                                    <security:authorize access="hasRole('ADMIN')">
-                                        [<a href="<c:url value="/blog/delete/${entry.id}"/>">Delete</a>]
-                                    </security:authorize>
-                                    <br/>
-                                </div>
-                            </div>
-                        </c:forEach>
+<%--                                    <div class="container">--%>
+<%--                                        <a href="<c:url value="/blog/view/${entry.id}" />">--%>
+<%--                                            description :--%>
+<%--                                            <c:out value="${entry.description}"/></a>--%>
+<%--                                        description: <c:out value="${entry.description}"/>)<br>--%>
+<%--                                        createby: <c:out value="${entry.createBy}"/><br>--%>
+<%--                                        createAt: <c:out value="${entry.createAt}"/>--%>
+<%--                                        <security:authorize access="hasRole('ADMIN') or--%>
+<%--                                                    principal.username=='${entry.createBy}'">--%>
+<%--                                            [<a href="<c:url value="/blog/edit/${entry.id}"/>">edit</a>]--%>
+<%--                                        </security:authorize>--%>
+<%--                                        <security:authorize access="hasRole('ADMIN')">--%>
+<%--                                            [<a href="<c:url value="/blog/delete/${entry.id}"/>">delete</a>]--%>
+<%--                                        </security:authorize>--%>
+<%--                                        <br/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+                                <tr>
+                                    <td>
+                                        <c:forEach items="${entry.attachments}" var="attachment" varStatus="status">
+                                            <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="100" height="100" class="img-thumbnail"/>
+                                        </c:forEach><br/><br/>
+                                    </td>
+                                    <td><c:out value="${entry.description}"/></td>
+                                    <td><c:out value="${entry.createBy}"/></td>
+                                    <td><c:out value="${entry.createAt}"/></td>
+                                    <td>
+                                        [<a href="<c:url value="/blog/view/${entry.id}"/>"><spring:message code="blogPage.view"/></a>]
+                                        <security:authorize access="hasRole('ADMIN') or principal.username=='${entry.createBy}'">
+                                            [<a href="<c:url value="/blog/edit/${entry.id}"/>"><spring:message code="blogPage.edit"/></a>]
+                                        </security:authorize>
+                                        <security:authorize access="hasRole('ADMIN')">
+                                            [<a href="<c:url value="/blog/delete/${entry.id}"/>"><spring:message code="blogPage.delete"/></a>]
+                                        </security:authorize>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
 
                     </c:otherwise>
                 </c:choose>
