@@ -27,7 +27,7 @@
               <form:label path="body"><spring:message code="blogPage.description"/></form:label><br/>
               <form:textarea path="body" rows="5" cols="30" /><br/><br/>
               <b><spring:message code="blogPage.add.more"/></b><br />
-              <input type="file" name="attachments" multiple="multiple"/><br/><br/>
+              <input type="file" name="attachments" multiple="multiple" accept="image/*" /><br/><br/>
               <input type="submit" value="<spring:message code="btn.save"/>"/><br/><br/>
             </form:form>
 
