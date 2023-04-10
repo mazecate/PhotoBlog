@@ -2,7 +2,7 @@
 <html>
 <head>
     <c:import url="head_script.jsp"/>
-    <title>Photoblog - Upload Photo History</title>
+    <title>Photoblog - <spring:message code="hist.all.photo"/></title>
     <style>
         .card {
             /* Add shadows to create the "card" effect */
@@ -38,15 +38,15 @@
             <div class="col">
                 <br>
                 <br>
-                <a href="<c:url value="/blog/list" />">Return to list blog</a>
+                <a href="<c:url value="/blog/list" />"><spring:message code="backlink.blog"/></a>
                 <br>
                 <br>
-                <h2>Upload Photo History</h2>
+                <h2><spring:message code="hist.all.photo"/></h2>
 
 
                 <c:choose>
                     <c:when test="${fn:length(uploadDatabase) == 0}">
-                        <i>There are no comment in the very blog.</i>
+                        <spring:message code="msg.noUpload"/>
                     </c:when>
                     <c:otherwise>
 

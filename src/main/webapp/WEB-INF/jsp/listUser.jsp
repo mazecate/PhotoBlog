@@ -2,7 +2,7 @@
 <html>
 <head>
   <c:import url="head_script.jsp"/>
-  <title>Photoblog - User Management</title>
+  <title>Photoblog - <spring:message code="User.head"/></title>
 </head>
 <body>
 <%--<c:url var="logoutUrl" value="/logout"/>--%>
@@ -19,28 +19,28 @@
       <div class="col">
         <br>
         <br>
-        <a href="<c:url value="/blog/list" />">Return to list blog</a>
+        <a href="<c:url value="/blog/list" />"><spring:message code="backlink.blog"/></a>
         <br>
         <br>
 
-        <h2>Users</h2>
+        <h2><spring:message code="User.head"/></h2>
 
-        <a href="<c:url value="/user/create" />">Create a User</a><br/><br/>
+        <a href="<c:url value="/user/create" />"><spring:message code="User.create"/></a><br/><br/>
 
         <c:choose>
           <c:when test="${fn:length(userList) == 0}">
-            <i>There are no users in the system.</i>
+            <i><spring:message code="msg.noUser"/></i>
           </c:when>
           <c:otherwise>
             <table class="table table-striped table-responsive">
               <tr>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Description</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Action</th>
+                <th><spring:message code="User.username"/></th>
+                <th><spring:message code="User.password"/></th>
+                <th><spring:message code="User.description"/></th>
+                <th><spring:message code="User.phone"/></th>
+                <th><spring:message code="User.email"/></th>
+                <th><spring:message code="User.role"/></th>
+                <th><spring:message code="User.action"/></th>
               </tr>
               <c:forEach items="${userList}" var="user">
                 <tr>
@@ -56,11 +56,11 @@
                     </c:forEach>
                   </td>
                   <td>
-                    [<a href="<c:url value="/user/profile/${user.username}" />">Profile</a>]
+                    [<a href="<c:url value="/user/profile/${user.username}" />"><spring:message code="User.profile"/></a>]
                     <br>
-                    [<a href="<c:url value="/user/edit/${user.username}" />">Edit</a>]
+                    [<a href="<c:url value="/user/edit/${user.username}" />"><spring:message code="User.edit"/></a>]
                     <br>
-                    [<a href="<c:url value="/user/delete/${user.username}" />">Delete</a>]
+                    [<a href="<c:url value="/user/delete/${user.username}" />"><spring:message code="User.delete"/></a>]
                   </td>
                 </tr>
               </c:forEach>

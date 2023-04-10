@@ -2,7 +2,7 @@
 <html>
 <head>
     <c:import url="head_script.jsp"/>
-    <title>Photoblog - Comment History</title>
+    <title>Photoblog - <spring:message code="hist.all.comment"/></title>
     <style>
         .card {
             /* Add shadows to create the "card" effect */
@@ -40,13 +40,13 @@
             <div class="col">
                 <br>
                 <br>
-                <a href="<c:url value="/blog/list" />">Return to list blog</a>
+                <a href="<c:url value="/blog/list" />"><spring:message code="backlink.blog"/></a>
                 <br>
                 <br>
-                <h2>Comment History</h2>
+                <h2><spring:message code="hist.all.comment"/></h2>
                 <c:choose>
                     <c:when test="${fn:length(commentDatabase) == 0}">
-                        <i>There are no comment in the very blog.</i>
+                        <i><spring:message code="msg.noComment"/></i>
                     </c:when>
                     <c:otherwise>
 
@@ -56,20 +56,20 @@
                                 blog id : <c:out value="${entry.id}"/><br>
 
                                 <c:if test="${fn:length(entry.comments) == 0}">
-                                    There are no comment in this blog.
+                                    <spring:message code="msg.noComment.single"/>
                                 </c:if>
                                 <c:forEach items="${entry.comments}" var="comment" varStatus="status">
 
 
                                     <c:out value="${comment.createBy}"/>
                                     comment
-                                    in blog ID : <c:out value="${comment.blog.id}"/>
+                                    in blog ID : <c:out value="${comment.blog.id}"/> and
                                     blog title is : <c:out value="${comment.blog.title}"/>
                                     <br>
                                     [text : <c:out value="${comment.body}"/>]
 
                                     <security:authorize access="hasRole('ADMIN')">
-                                        [<a href="<c:url value="/blog/${entry.id}/deletecomment2/${comment.id}"/>">Delete</a>]
+                                        [<a href="<c:url value="/blog/${entry.id}/deletecomment2/${comment.id}"/>"><spring:message code="blogPage.delete"/></a>]
                                     </security:authorize>
                                     <br>
                                 </c:forEach><br/><br/>

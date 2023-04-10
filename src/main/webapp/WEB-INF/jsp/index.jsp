@@ -29,7 +29,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <c:choose>
                     <c:when test="${fn:length(photoList) == 0}">
-                        <i>There are no blog in the system.</i>
+                        <i><spring:message code="msg.noBlog"/></i>
                     </c:when>
                     <c:otherwise>
                         <c:forEach items="${photoList}" var="entry">

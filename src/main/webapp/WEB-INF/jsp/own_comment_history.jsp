@@ -2,7 +2,7 @@
 <html>
 <head>
     <c:import url="head_script.jsp"/>
-    <title>Photoblog - Own Upload Comment History</title>
+    <title>Photoblog - <spring:message code="hist.own.comment"/></title>
     <style>
         .card {
             /* Add shadows to create the "card" effect */
@@ -39,18 +39,15 @@
             <div class="col">
                 <br>
                 <br>
-                <a href="<c:url value="/blog/list" />">Return to list blog</a>
+                <a href="<c:url value="/blog/list" />"><spring:message code="backlink.blog"/></a>
                 <br>
                 <br>
-                <a href="<c:url value="/blog/list" />">Return to list blog</a>
-                <br>
-                <br>
-                <h2>Own Upload Comment History</h2>
+                <h2><spring:message code="hist.own.comment"/></h2>
 
 
                 <c:choose>
                     <c:when test="${fn:length(owncommentDatabase) == 0}">
-                        <i>There are no comment in the very blog.</i>
+                        <i><spring:message code="msg.noComment"/></i>
                     </c:when>
                     <c:otherwise>
 
@@ -66,7 +63,7 @@
                             [text : <c:out value="${b.body}"/>]
 
                             <security:authorize access="hasRole('ADMIN')">
-                                [<a href="<c:url value="/blog/${b.blog.id}/deletecomment3/${b.id}"/>">Delete</a>]
+                                [<a href="<c:url value="/blog/${b.blog.id}/deletecomment3/${b.id}"/>"><spring:message code="blogPage.delete"/></a>]
                             </security:authorize>
                             <br>
                         </c:forEach>

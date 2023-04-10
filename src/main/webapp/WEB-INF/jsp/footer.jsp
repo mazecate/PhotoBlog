@@ -1,6 +1,6 @@
 <footer class="text-body-secondary py-5">
   <div class="container">
-    <p class="mb-1">From IT9 Team</p>
+    <p class="mb-1">&copy; <spring:message code="footer.copyright"/></p>
   </div>
 </footer>
 

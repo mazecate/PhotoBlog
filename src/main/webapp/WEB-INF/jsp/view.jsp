@@ -2,7 +2,7 @@
 <html>
 <head>
     <c:import url="head_script.jsp"/>
-    <title>Photoblog - View Blog #${blogid}</title>
+    <title>Photoblog - <spring:message code="backlink.blog"/> #${blogid}</title>
 </head>
 <body>
 <%--<c:url var="logoutUrl" value="/logout"/>--%>
@@ -18,32 +18,43 @@
             <div class="col">
                 <br>
                 <br>
-                <a href="<c:url value="/blog/list" />">Return to list blog</a>
+                <a href="<c:url value="/blog/list" />"><spring:message code="backlink.blog"/></a>
                 <br>
                 <br>
 
-                <h2>Blogid #${blogid}: <c:out value="${blog.description}"/></h2>
-                <security:authorize access="hasRole('ADMIN') or
-                                          principal.username=='${blog.createBy}'">
-                    [<a href="<c:url value="/blog/edit/${blog.id}"/>">Edit</a>]
+                <h2><spring:message code="blogPage.title"/> #${blogid}: <c:out value="${blog.description}"/></h2>
+                <security:authorize access="hasRole('ADMIN') or principal.username=='${blog.createBy}'">
+                    [<a href="<c:url value="/blog/edit/${blog.id}"/>"><spring:message code="blogPage.edit"/></a>]
                 </security:authorize>
                 <security:authorize access="hasRole('ADMIN')">
-                    [<a href="<c:url value="/blog/delete/${blog.id}"/>">Delete</a>]
+                    [<a href="<c:url value="/blog/delete/${blog.id}"/>"><spring:message code="blogPage.delete"/></a>]
                 </security:authorize>
+
+                <br/>
+                <br/>
+
+                <i><spring:message code="blogPage.creator"/> - <c:out value="${blog.createBy}"/></i>
                 <br/><br/>
-                <i>create By - <c:out value="${blog.createBy}"/></i><br/><br/>
-                <c:out value="${blog.description}"/><br/><br/>
+                <spring:message code="blogPage.description"/>:
+                <br><c:out value="${blog.description}"/>
+
+                <br/>
+                <br/>
+
                 <c:if test="${!empty blog.attachments}">
-                    Attachments:
+                    <spring:message code="blogPage.attachment"/>:<br>
                     <c:forEach items="${blog.attachments}" var="attachment" varStatus="status">
                         <c:if test="${!status.first}">, </c:if>
                         <a href="<c:url value="/blog/${blogid}/attachment/${attachment.id}" />">
-                            <c:out value="${attachment.name}"/></a>
+                            <c:out value="${attachment.name}"/>
+                        </a>
 
-                        <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="20" height="30"/>
+                        <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="10%" height="auto" class="img-thumbnail"/>
                         <security:authorize access="hasRole('ADMIN') or principal.username=='${blog.createBy}'">
-                        [<a href="<c:url value="/blog/${blogid}/delete/${attachment.id}"/>">Delete</a>]
+                        [<a href="<c:url value="/blog/${blogid}/delete/${attachment.id}"/>"><spring:message code="blogPage.delete"/></a>]
                         </security:authorize>
+                        <br>
+                        <br>
                     </c:forEach><br/><br/>
                 </c:if>
 
@@ -53,18 +64,19 @@
                     <c:out value="${c.body}"/></a> at
                     <c:out value="${c.createAt}"/></a>
                     <security:authorize access="hasRole('ADMIN') or principal.username=='${c.createBy}'">
-                        [<a href="<c:url value="/blog/${blogid}/deletecomment/${c.id}"/>">Delete</a>]
+                        [<a href="<c:url value="/blog/${blogid}/deletecomment/${c.id}"/>"><spring:message code="blogPage.delete"/></a>]
                     </security:authorize>
                     <br>
                 </c:forEach>
 
 
                 <form:form method="POST" enctype="multipart/form-data" modelAttribute="commentForm">
-                    <form:label path="body">comment</form:label>
-                    <form:textarea path="body" rows="1" cols="20"/><br/><br/>
-
-
-                    <input type="submit" value="Submit"/>
+                    <form:label path="body"><spring:message code="blogPage.comment"/></form:label>
+                    <br>
+                    <form:textarea path="body" rows="1" cols="20"/>
+                    <br/>
+                    <br/>
+                    <input type="submit" value="<spring:message code="btn.submit"/>"/>
                 </form:form>
             </div>
         </div>
