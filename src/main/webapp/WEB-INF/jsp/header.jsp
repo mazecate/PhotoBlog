@@ -20,6 +20,12 @@
                     </li>
                     <security:authorize access="isAuthenticated()">
                         <li class="nav-item">
+                            <a class="nav-link" href='<c:url value="/user/list"/>'><fmt:message key="User.h2" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href='<c:url value="/blog/list"/>'><fmt:message key="blogPage.head" /></a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href='<c:url value="/user/profile/"/><security:authentication property="principal.username" />'><fmt:message key="common.profile" /></a>
                         </li>
 

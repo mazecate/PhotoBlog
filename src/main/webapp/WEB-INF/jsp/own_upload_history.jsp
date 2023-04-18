@@ -50,20 +50,29 @@
                     </c:when>
                     <c:otherwise>
 
-                        <c:forEach items="${ownuploadDatabase}" var="entry">
-
-                            <div class="card">
-
-
-                                <c:out value="${entry.createBy}"/>
-                                create a blog ->title : <c:out value="${entry.description}"/>
-                                (blogID) : <c:out value="${entry.id}"/>
-                                at : <c:out value="${entry.createAt}"/>
-                                <br>
-
-
-                            </div>
-                        </c:forEach>
+                        <table class="table table-striped table-responsive">
+                            <tr>
+                                <th><spring:message code="blogPage.blogId"/></th>
+                                <th><spring:message code="blogPage.creator"/></th>
+                                <th><spring:message code="blogPage.description"/></th>
+                                <th><spring:message code="blogPage.create.time"/></th>
+                            </tr>
+                            <c:forEach items="${ownuploadDatabase}" var="entry">
+    <%--                            <div class="card">--%>
+    <%--                                <c:out value="${entry.createBy}"/>--%>
+    <%--                                create a blog ->title : <c:out value="${entry.description}"/>--%>
+    <%--                                (blogID) : <c:out value="${entry.id}"/>--%>
+    <%--                                at : <c:out value="${entry.createAt}"/>--%>
+    <%--                                <br>--%>
+    <%--                            </div>--%>
+                                    <tr>
+                                        <td><c:out value="${entry.id}"/></td>
+                                        <td><c:out value="${entry.createBy}"/></td>
+                                        <td><c:out value="${entry.description}"/></td>
+                                        <td><c:out value="${entry.createAt}"/></td>
+                                    </tr>
+                            </c:forEach>
+                        </table>
 
                     </c:otherwise>
                 </c:choose>
