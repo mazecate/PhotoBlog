@@ -51,28 +51,31 @@
                     <c:otherwise>
 
                         <c:forEach items="${commentDatabase}" var="entry">
-
-                            <div class="card">
-                                blog id : <c:out value="${entry.id}"/><br>
-
+                            <div class="card mt-5 p-3" style="border: 1px #FFFFFF solid;">
+                                <h1><spring:message code="blogPage.blogId"/>: <c:out value="${entry.id}"/></h1>
+                                <hr>
                                 <c:if test="${fn:length(entry.comments) == 0}">
                                     <spring:message code="msg.noComment.single"/>
                                 </c:if>
                                 <c:forEach items="${entry.comments}" var="comment" varStatus="status">
+                                    <div class="mb-3">
+                                        <p><spring:message code="blogPage.blogId"/>: <c:out value="${comment.blog.id}"/></p>
+                                        <p><spring:message code="blogPage.blog.title"/>: <c:out value="${comment.blog.title}"/></p>
+                                        <p><spring:message code="hist.comment.creator"/>: <c:out value="${comment.createBy}"/></p>
+                                        <p><spring:message code="blogPage.comment"/>: [<c:out value="${comment.body}"/>]</p>
+    <%--                                    comment--%>
+    <%--                                    in blog ID : <c:out value="${comment.blog.id}"/> and--%>
+    <%--                                    blog title is : <c:out value="${comment.blog.title}"/>--%>
+    <%--                                    <br>--%>
+    <%--                                    [text : <c:out value="${comment.body}"/>]--%>
 
+                                        <security:authorize access="hasRole('ADMIN')">
+                                            [<a href="<c:url value="/blog/${entry.id}/deletecomment2/${comment.id}"/>"><spring:message code="blogPage.delete"/></a>]
+                                        </security:authorize>
+                                    </div>
+                                    <hr>
+                                </c:forEach>
 
-                                    <c:out value="${comment.createBy}"/>
-                                    comment
-                                    in blog ID : <c:out value="${comment.blog.id}"/> and
-                                    blog title is : <c:out value="${comment.blog.title}"/>
-                                    <br>
-                                    [text : <c:out value="${comment.body}"/>]
-
-                                    <security:authorize access="hasRole('ADMIN')">
-                                        [<a href="<c:url value="/blog/${entry.id}/deletecomment2/${comment.id}"/>"><spring:message code="blogPage.delete"/></a>]
-                                    </security:authorize>
-                                    <br>
-                                </c:forEach><br/><br/>
 
                             </div>
                         </c:forEach>

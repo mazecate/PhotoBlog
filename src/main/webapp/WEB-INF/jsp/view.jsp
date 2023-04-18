@@ -45,11 +45,12 @@
                     <spring:message code="blogPage.attachment"/>:<br>
                     <c:forEach items="${blog.attachments}" var="attachment" varStatus="status">
                         <c:if test="${!status.first}">, </c:if>
-                        <a href="<c:url value="/blog/${blogid}/attachment/${attachment.id}" />">
-                            <c:out value="${attachment.name}"/>
-                        </a>
+<%-- Comment for generate as link                       --%>
+<%--                        <a href="<c:url value="/blog/${blogid}/attachment/${attachment.id}" />">--%>
+<%--                            <c:out value="${attachment.name}"/>--%>
+<%--                        </a>--%>
 
-                        <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="10%" height="auto" class="img-thumbnail"/>
+                        <img src="data:image/jpg;base64,${attachment.contenttoshow}" width="20%" height="auto" class="img-thumbnail"/>
                         <security:authorize access="hasRole('ADMIN') or principal.username=='${blog.createBy}'">
                         [<a href="<c:url value="/blog/${blogid}/delete/${attachment.id}"/>"><spring:message code="blogPage.delete"/></a>]
                         </security:authorize>
@@ -59,15 +60,33 @@
                 </c:if>
 
 
-                <c:forEach items="${blog.comments}" var="c" varStatus="status">
-                    <c:out value="${c.createBy}"/></a> say:
-                    <c:out value="${c.body}"/></a> at
-                    <c:out value="${c.createAt}"/></a>
-                    <security:authorize access="hasRole('ADMIN') or principal.username=='${c.createBy}'">
-                        [<a href="<c:url value="/blog/${blogid}/deletecomment/${c.id}"/>"><spring:message code="blogPage.delete"/></a>]
-                    </security:authorize>
-                    <br>
-                </c:forEach>
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <th><spring:message code="hist.comment.creator"/></th>
+                        <th><spring:message code="blogPage.comment"/></th>
+                        <th><spring:message code="blogPage.create.time"/></th>
+                        <th><spring:message code="blogPage.action"/></th>
+                    </tr>
+                    <c:forEach items="${blog.comments}" var="c" varStatus="status">
+                        <tr>
+<%--                        <c:out value="${c.createBy}"/></a> say:--%>
+<%--                        <c:out value="${c.body}"/></a> at--%>
+<%--                        <c:out value="${c.createAt}"/></a>--%>
+<%--                            <security:authorize access="hasRole('ADMIN') or principal.username=='${c.createBy}'">--%>
+<%--                                [<a href="<c:url value="/blog/${blogid}/deletecomment/${c.id}"/>"><spring:message code="blogPage.delete"/></a>]--%>
+<%--                            </security:authorize>--%>
+        <%--                        <br>--%>
+                            <td><c:out value="${c.createBy}"/></td>
+                            <td><c:out value="${c.body}"/></td>
+                            <td><c:out value="${c.createAt}"/></td>
+                            <td>
+                                <security:authorize access="hasRole('ADMIN') or principal.username=='${c.createBy}'">
+                                    [<a href="<c:url value="/blog/${blogid}/deletecomment/${c.id}"/>"><spring:message code="blogPage.delete"/></a>]
+                                </security:authorize>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
 
 
                 <form:form method="POST" enctype="multipart/form-data" modelAttribute="commentForm">
